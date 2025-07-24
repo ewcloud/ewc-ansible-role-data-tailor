@@ -1,0 +1,2 @@
+vars/main.yml yaml[line-length] # disable the line-length check
+tasks/main.yml yaml[line-length] # disable the line-length check
