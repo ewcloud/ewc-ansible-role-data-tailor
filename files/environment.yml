@@ -1,0 +1,14 @@
+channels:
+    - conda-forge
+    - eumetsat
+dependencies:
+  - python=3.9.*
+  - epct=3.5.*
+  - epct_webui=3.5.*
+  - epct_restapi=3.5.*
+  - epct_plugin_gis=3.4.*
+  - msg-gdal-driver=0.4.*
+  - epct_plugin_ncarrays=1.2.*
+  - epct_plugin_netcdf_generator=3.2.*
+  - epct_plugin_umarf=3.3.*
+  - eumdac=3.0.*

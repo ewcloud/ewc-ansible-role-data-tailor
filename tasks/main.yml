@@ -1,0 +1,81 @@
+---
+- name: Verify Linux distribution
+  ansible.builtin.assert:
+    that:
+      - ( ansible_facts['distribution'] == 'Rocky' and ansible_facts['distribution_major_version'] in ['8', '9']) or (ansible_facts['distribution'] == 'Ubuntu' and ansible_facts['distribution_major_version'] in ['22', '24'])
+    fail_msg: "Supports RockyLinux and Ubuntu. Detected: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_major_version'] }}."
+    success_msg: "Running supported {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_major_version'] }} distribution."
+
+- name: Validate user inputs
+  ansible.builtin.assert:
+    that:
+      - data_tailor_env_wipe is string and data_tailor_env_wipe != '' and data_tailor_env_wipe is defined
+      - data_tailor_env_name is string and data_tailor_env_name is defined and data_tailor_env_name != ''
+      - conda_prefix is string and conda_prefix is defined and conda_prefix != ''
+      - conda_user is string and conda_user is defined and conda_user != ''
+    fail_msg: "Input validation failed. See README.md for information on required inputs and their format."
+    success_msg: "User input configuration is valid."
+
+- name: Set exists data tailor environment based on user input
+  ansible.builtin.set_fact:
+    data_tailor_env_path: "{{ conda_prefix }}/envs/{{ data_tailor_env_name }}"
+
+- name: Wipe existing conda environment
+  ansible.builtin.file:
+    path: "{{ data_tailor_env_path }}"
+    state: absent
+  when: data_tailor_env_wipe == "yes"
+
+- name: Add conda environment dependencies definition
+  ansible.builtin.copy:
+    src: "environment.yml"
+    dest: /tmp/{{ data_tailor_env_name }}.yml
+    mode: "644"
+  register: data_tailor_env_define
+
+- name: Create conda environment
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    export PIP_NO_CACHE_DIR=false
+    mamba env create -y -f /tmp/{{ data_tailor_env_name }}.yml -p {{ data_tailor_env_path }} && mamba clean --all -y
+  args:
+    executable: /bin/bash
+    creates: "{{ data_tailor_env_path }}"
+  register: data_tailor_env_create
+
+- name: Update conda environment
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    export PIP_NO_CACHE_DIR=false
+    mamba env update --prune -y -f /tmp/{{ data_tailor_env_name }}.yml -p {{ data_tailor_env_path }} && mamba clean --all -y
+  args:
+    executable: /bin/bash
+  when: not data_tailor_env_create.changed and data_tailor_env_define.changed
+  register: data_tailor_env_updated
+  changed_when: data_tailor_env_updated.rc == 0
+
+- name: Gather conda environment package versions
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    set -o pipefail
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    mamba list -p {{ data_tailor_env_path }} --json '^(msg-gdal-driver|eumdac|epct[a-zA-Z_]{0,})$'
+  args:
+    executable: /bin/bash
+  register: conda_package_versions
+  changed_when: false
+
+- name: List installed conda package versions
+  ansible.builtin.debug:
+    msg: "{{ conda_package_versions.stdout | from_json | json_query('[].{name: name, version: version}') }}"

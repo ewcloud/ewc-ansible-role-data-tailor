@@ -1,0 +1,19 @@
+---
+
+stages:
+  - lint
+
+variables:
+  ANSIBLE_LINT_VERSION: 0.79.0
+
+# Linting with ansible-lint
+ansible-lint:
+  image: registry.gitlab.com/pipeline-components/ansible-lint:${ANSIBLE_LINT_VERSION}
+  stage: lint
+  script:
+    - ansible-lint --offline .
+  rules:
+    - changes:
+      - "**/*.yml"
+  tags:
+    - ewc
