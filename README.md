@@ -79,27 +79,22 @@ ansible-playbook -i inventory.yml playbook.yml
 | conda_user | user that will own the conda installation. Example: `root` | `string` | n/a | yes |
 
 ## Final Environment
->⚠️ Versions listed here refer only to those available for RockyLinux
-and Ubuntu packages as of June 26th, 2025. As new security patches/features
-are published by their authors, and newer Linux image versions are 
-introduced into the EWC, the effective versions installed in your 
-environment might be higher.
 
 Applying this template will trigger the installation of the following 
 open-source packages onto your desired target host:
 
 | Name | Version | License | Package Info |
 |------|---------|---------|--------------|
-| python | >=3.9 | PSF | https://docs.python.org/3/license.html |
-| epct | >=3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_webui | >=3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_restapi | >=3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_gis | >=3.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| msg-gdal-driver | >=0.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_ncarrays | >=1.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_netcdf_generator | >=3.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_umarf | >=3.3 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| eumdac | >=3.0 | MIT | https://gitlab.eumetsat.int/eumetlab/data-services/eumdac |
+| python | 3.9 | PSF | https://docs.python.org/3/license.html |
+| epct | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_webui | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_restapi | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_plugin_gis | 3.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| msg-gdal-driver | 0.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_plugin_ncarrays | 1.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_plugin_netcdf_generator | 3.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| epct_plugin_umarf | 3.3 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
+| eumdac | 3.0 | MIT | https://gitlab.eumetsat.int/eumetlab/data-services/eumdac |
 
 ## Changelog
 All notable changes (i.e. fixes, features and breaking changes) are documented 
