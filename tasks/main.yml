@@ -12,6 +12,7 @@
       - data_tailor_env_wipe is string and data_tailor_env_wipe != '' and data_tailor_env_wipe is defined
       - data_tailor_env_name is string and data_tailor_env_name is defined and data_tailor_env_name != ''
       - conda_prefix is string and conda_prefix is defined and conda_prefix != ''
+      - conda_user is string and conda_user is defined and conda_user != ''
     fail_msg: "Input validation failed. See README.md for information on required inputs and their format."
     success_msg: "User input configuration is valid."
 
@@ -24,3 +25,24 @@
     path: "{{ data_tailor_env_path }}"
     state: absent
   when: data_tailor_env_wipe == "yes"
+
+- name: Add conda environment dependencies definition
+  ansible.builtin.copy:
+    src: "environment.yml"
+    dest: /tmp/{{ data_tailor_env_name }}.yml
+    mode: "644"
+  register: data_tailor_env_define
+
+- name: Create conda environment
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    export PIP_NO_CACHE_DIR=false
+    mamba env create -y -f /tmp/{{ data_tailor_env_name }}.yml -p {{ data_tailor_env_path }} && mamba clean --all -y
+  args:
+    executable: /bin/bash
+    creates: "{{ data_tailor_env_path }}"
+  register: data_tailor_env_create
