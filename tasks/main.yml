@@ -46,3 +46,18 @@
     executable: /bin/bash
     creates: "{{ data_tailor_env_path }}"
   register: data_tailor_env_create
+
+- name: Update conda environment
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    export PIP_NO_CACHE_DIR=false
+    mamba env update --prune -y -f /tmp/{{ data_tailor_env_name }}.yml -p {{ data_tailor_env_path }} && mamba clean --all -y
+  args:
+    executable: /bin/bash
+  when: not data_tailor_env_create.changed and data_tailor_env_define.changed
+  register: data_tailor_env_updated
+  changed_when: data_tailor_env_updated.rc == 0
