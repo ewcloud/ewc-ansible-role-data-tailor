@@ -1,19 +1,41 @@
 ---
+include:
+  - project: '$MIRROR_PATH/to-be-continuous/semantic-release'
+    ref: '3.14.3'
+    file: '/templates/gitlab-ci-semrel.yml'
 
 stages:
   - lint
+  - release
 
 variables:
-  ANSIBLE_LINT_VERSION: 0.79.0
+  SEMREL_VERSION: 24.2.5
+  SEMREL_CHANGELOG_ENABLED: "true"
 
 # Linting with ansible-lint
 ansible-lint:
-  image: registry.gitlab.com/pipeline-components/ansible-lint:${ANSIBLE_LINT_VERSION}
+  image: registry.gitlab.com/pipeline-components/ansible-lint:0.79.0
   stage: lint
   script:
     - ansible-lint --offline .
   rules:
+    - if: $CI_COMMIT_TAG || $CI_COMMIT_TITLE =~ /^chore.*/
+      when: never
     - changes:
-      - "**/*.yml"
+        - "**/*.yml"
+        
   tags:
     - ewc
+
+# Automated CHANGELOG.md generation from Conventional Commits history and git tag for release
+semantic-release:
+  stage: release
+  rules:
+    - if: $CI_COMMIT_TAG || $CI_COMMIT_TITLE =~ /^chore.*/
+      when: never
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE != "merge_request_event"'
+      changes:
+        - "**/*.yml"
+  tags:
+    - ewc
+
