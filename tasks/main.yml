@@ -61,3 +61,21 @@
   when: not data_tailor_env_create.changed and data_tailor_env_define.changed
   register: data_tailor_env_updated
   changed_when: data_tailor_env_updated.rc == 0
+
+- name: Gather conda environment package versions
+  become: true
+  become_user: "{{ conda_user }}"
+  become_method: ansible.builtin.sudo
+  ansible.builtin.shell: |
+    set -o pipefail
+    source /etc/profile.d/conda.sh
+    source /etc/profile.d/mamba.sh
+    mamba list -p {{ data_tailor_env_path }} --json '^(msg-gdal-driver|eumdac|epct[a-zA-Z_]{0,})$'
+  args:
+    executable: /bin/bash
+  register: conda_package_versions
+  changed_when: false
+
+- name: List installed conda package versions
+  ansible.builtin.debug:
+    msg: "{{ conda_package_versions.stdout | from_json | json_query('[].{name: name, version: version}') }}"
