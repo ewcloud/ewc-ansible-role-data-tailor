@@ -86,15 +86,15 @@ open-source packages onto your desired target host:
 | Name | Version | License | Package Info |
 |------|---------|---------|--------------|
 | python | 3.9 | PSF | https://docs.python.org/3/license.html |
-| epct | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_webui | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_restapi | 3.5 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_gis | 3.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| msg-gdal-driver | 0.4 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_ncarrays | 1.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_netcdf_generator | 3.2 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| epct_plugin_umarf | 3.3 | Apache License 2.0  | https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide |
-| eumdac | 3.0 | MIT | https://gitlab.eumetsat.int/eumetlab/data-services/eumdac |
+| epct | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct |
+| epct_webui | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_webui |
+| epct_restapi | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_restapi |
+| epct_plugin_gis | 3.4 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_gis |
+| msg-gdal-driver | 0.4 | Apache License 2.0  | https://anaconda.org/eumetsat/msg-gdal-driver |
+| epct_plugin_ncarrays | 1.2 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_ncarrays |
+| epct_plugin_netcdf_generator | 3.2 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_netcdf_generator |
+| epct_plugin_umarf | 3.3 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_umarf |
+| eumdac | 3.0 | MIT | https://anaconda.org/eumetsat/eumdac |
 
 ## Changelog
 All notable changes (i.e. fixes, features and breaking changes) are documented 
