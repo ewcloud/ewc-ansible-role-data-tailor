@@ -11,10 +11,18 @@ The template is designed to:
 
 
 ## Copyright and License
->💡 No dependencies are distributed as part of this repository.
+Copyright © EUMETSAT 2025.
 
-See the [LICENSE](./LICENSE) file for licensing information as it pertains to
-files in this repository.
+The provided code and instructions are licensed under the [MIT license](./LICENSE).
+They are intended to automate the setup of an environment that includes 
+third-party software components.
+The usage and distribution terms of the resulting environment are 
+subject to the individual licenses of those third-party libraries.
+
+Users are responsible for reviewing and complying with the licenses of
+all third-party components included in the environment.
+
+Contact [EUMETSAT](http://www.eumetsat.int) for details on the usage and distribution terms.
 
 ## Usage
 
@@ -78,22 +86,24 @@ ansible-playbook -i inventory.yml playbook.yml
 | conda_prefix | prefix where conda will be installed. Example: `/opt/conda` | `string` | n/a | yes |
 | conda_user | user that will own the conda installation. Example: `root` | `string` | n/a | yes |
 
-## Final Environment
+## SW Bill of Materials (SBoM)
 
-Applying this template will trigger the installation of the following 
-open-source packages onto your desired target host:
+Third-party components used in the resulting environment.
 
-| Name | Version | License | Package Info |
+The following components will be included in the resulting environment:
+
+
+| Component | Version | License | Home URL |
 |------|---------|---------|--------------|
 | python | 3.9 | PSF | https://docs.python.org/3/license.html |
-| epct | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct |
-| epct_webui | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_webui |
-| epct_restapi | 3.5 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_restapi |
-| epct_plugin_gis | 3.4 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_gis |
-| msg-gdal-driver | 0.4 | Apache License 2.0  | https://anaconda.org/eumetsat/msg-gdal-driver |
-| epct_plugin_ncarrays | 1.2 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_ncarrays |
-| epct_plugin_netcdf_generator | 3.2 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_netcdf_generator |
-| epct_plugin_umarf | 3.3 | Apache License 2.0  | https://anaconda.org/eumetsat/epct_plugin_umarf |
+| epct | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct |
+| epct_webui | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct_webui |
+| epct_restapi | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct_restapi |
+| epct_plugin_gis | 3.4 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_gis |
+| msg-gdal-driver | 0.4 | Apache-2.0  | https://anaconda.org/eumetsat/msg-gdal-driver |
+| epct_plugin_ncarrays | 1.2 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_ncarrays |
+| epct_plugin_netcdf_generator | 3.2 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_netcdf_generator |
+| epct_plugin_umarf | 3.3 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_umarf |
 | eumdac | 3.0 | MIT | https://anaconda.org/eumetsat/eumdac |
 
 ## Changelog
