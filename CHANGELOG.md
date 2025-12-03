@@ -3,6 +3,13 @@
 All notable changes to this project are documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/ewcloud/ewc-ansible-role-data-tailor/compare/1.0.0...1.1.0) (2025-12-03)
+
+
+### Features
+
+* Automated patch rollout and test automation support ([#2](https://github.com/ewcloud/ewc-ansible-role-data-tailor/issues/2)) ([cf235c2](https://github.com/ewcloud/ewc-ansible-role-data-tailor/commit/cf235c2c3764e1b0faeed9626d98d271e6842c0e))
+
 # 1.0.0 (2025-09-04)
 
 
