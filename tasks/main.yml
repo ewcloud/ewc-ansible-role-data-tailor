@@ -86,6 +86,8 @@
       set -o pipefail
       curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /tmp
     creates: /tmp/trivy
+  args:
+    executable: /bin/bash
 
 - name: Auto-generate SBOM (SPDX file at /sbom.json)
   ansible.builtin.command:
