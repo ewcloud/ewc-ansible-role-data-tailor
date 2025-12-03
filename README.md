@@ -5,7 +5,7 @@ This repository contains a configuration template
 to customize your environment in the
 [European Weather Cloud (EWC)](https://europeanweather.cloud/).
 The template is designed to:
-* Configure pre-existing virtual machines such that they:
+* Configure pre-existing virtual machines runing RockyLinux versions 9 or 8, or Ubuntu versions 24 or 22, such that they:
   * Are able to run [EUMETSAT Data Tailor standalone](https://user.eumetsat.int/resources/user-guides/data-tailor-standalone-guide) and [EUMETSAT Data Access
   Client (EUMDAC)](https://pypi.org/project/eumdac/).
 
@@ -86,25 +86,23 @@ ansible-playbook -i inventory.yml playbook.yml
 | conda_prefix | prefix where conda will be installed. Example: `/opt/conda` | `string` | n/a | yes |
 | conda_user | user that will own the conda installation. Example: `root` | `string` | n/a | yes |
 
-## SW Bill of Materials (SBoM)
-
-Third-party components used in the resulting environment.
+# Dependencies
+> 💡 Upon execution, a SBOM (SPDX format) is auto-generated and stored in the VM's file system root directory (see `/sbom.json`).
 
 The following components will be included in the resulting environment:
 
-
-| Component | Version | License | Home URL |
-|------|---------|---------|--------------|
-| python | 3.9 | PSF | https://docs.python.org/3/license.html |
-| epct | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct |
-| epct_webui | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct_webui |
-| epct_restapi | 3.5 | Apache-2.0  | https://anaconda.org/eumetsat/epct_restapi |
-| epct_plugin_gis | 3.4 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_gis |
-| msg-gdal-driver | 0.4 | Apache-2.0  | https://anaconda.org/eumetsat/msg-gdal-driver |
-| epct_plugin_ncarrays | 1.2 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_ncarrays |
-| epct_plugin_netcdf_generator | 3.2 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_netcdf_generator |
-| epct_plugin_umarf | 3.3 | Apache-2.0  | https://anaconda.org/eumetsat/epct_plugin_umarf |
-| eumdac | 3.0 | MIT | https://anaconda.org/eumetsat/eumdac |
+| Component | Home URL |
+|------|---------|
+| python | https://docs.python.org/3/license.html |
+| epct | https://anaconda.org/eumetsat/epct |
+| epct_webui | https://anaconda.org/eumetsat/epct_webui |
+| epct_restapi | https://anaconda.org/eumetsat/epct_restapi |
+| epct_plugin_gis | https://anaconda.org/eumetsat/epct_plugin_gis |
+| msg-gdal-driver |  https://anaconda.org/eumetsat/msg-gdal-driver |
+| epct_plugin_ncarrays | https://anaconda.org/eumetsat/epct_plugin_ncarrays |
+| epct_plugin_netcdf_generator | https://anaconda.org/eumetsat/epct_plugin_netcdf_generator |
+| epct_plugin_umarf | https://anaconda.org/eumetsat/epct_plugin_umarf |
+| eumdac | https://anaconda.org/eumetsat/eumdac |
 
 ## Changelog
 All notable changes (i.e. fixes, features and breaking changes) are documented 
