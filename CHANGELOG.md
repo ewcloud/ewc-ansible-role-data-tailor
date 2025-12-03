@@ -3,6 +3,13 @@
 All notable changes to this project are documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/ewcloud/ewc-ansible-role-data-tailor/compare/1.1.0...1.1.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* Portable bash command for Trivy installation ([695cbd8](https://github.com/ewcloud/ewc-ansible-role-data-tailor/commit/695cbd88d416d6196843d28692e34d791f18fb94))
+
 # [1.1.0](https://github.com/ewcloud/ewc-ansible-role-data-tailor/compare/1.0.0...1.1.0) (2025-12-03)
 
 
